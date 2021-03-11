@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
+import { useHistory } from "react-router";
 
+// TODO: convert this class component into a function hook component
 export default class Register extends Component {
   state = {
     username: "",
@@ -23,7 +25,7 @@ export default class Register extends Component {
     event.preventDefault();
 
     const data = axios
-      .post("http://localhost:5000/api/register", {
+      .post("http://localhost:5000/register", {
         username: this.state.username,
         password: this.state.password1,
       })
@@ -54,7 +56,7 @@ export default class Register extends Component {
           <Modal.Footer>
             <Button
               variant="danger"
-              onClick={(event) => {
+              onClick={() => {
                 this.setState({ error: null });
               }}
             >
@@ -72,11 +74,13 @@ export default class Register extends Component {
           <Modal.Footer>
             <Button
               variant="success"
-              onClick={(event) => {
-                this.props.history.push({
-                  pathname: "/",
-                  state: { username: this.state.username },
-                });
+              onClick={() => {
+                console.log(this);
+                //
+                // this.props.history.push({
+                //   pathname: "/",
+                //   state: { username: this.state.username },
+                // });
               }}
             >
               Close
